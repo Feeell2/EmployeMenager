@@ -15,6 +15,8 @@ import java.util.List;
 public class MyPanel extends JPanel{
     private EmployeeTableModel employeeTableModel;
     private EmployeeListControler listControler;
+    private FileSave fileSave;
+    private ReadFile readFile;
 
     public MyPanel() {
         this.listControler=new EmployeeListControler();
@@ -22,6 +24,8 @@ public class MyPanel extends JPanel{
         listControler.setEmployeeTableModel(employeeTableModel);
         this.employeeTableModel.setListControler(listControler);
         JTable employeeTable=new JTable(employeeTableModel);
+        this.fileSave=new FileSave(employeeTableModel);
+        this.readFile=new ReadFile(listControler);
 
         employeeTable.addMouseListener(new JTableButtonMouseListener(employeeTable));
         TableColumn positonColumn=employeeTable.getColumnModel().getColumn(2);
@@ -77,13 +81,32 @@ public class MyPanel extends JPanel{
                 listControler.clearList();
             }
         });
-        JMenuItem openFileItem=new JMenuItem("Open");
-//    openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+//        JMenuItem openFileItem=new JMenuItem("Open");
+////    openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
         JMenuItem saveFile=new JMenuItem("Save");
-        jMenu.add(openFileItem);
+        saveFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileSave.saveData();
+
+            }
+        });
+        jMenu.add(openFile());
         jMenu.add(newFileItem);
         jMenu.add(saveFile);
         return jMenu;
     };
+    public JMenuItem openFile(){
+        JMenuItem item=new JMenuItem("Open");
+        JFileChooser fileChooser=new JFileChooser();
+        item.addActionListener(event->{
+            int code=fileChooser.showOpenDialog(new MyPanel() );
+            if(code==JFileChooser.APPROVE_OPTION){
+                String path=fileChooser.getSelectedFile().getPath();
+                readFile.readFile(path);
+            }
+        });
+        return item;
+    }
 
 }
