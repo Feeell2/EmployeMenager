@@ -1,22 +1,27 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 public class MyPanel extends JPanel{
     private EmployeeTableModel employeeTableModel;
     private EmployeeListControler listControler;
     private FileSave fileSave;
     private ReadFile readFile;
+    private TableRowSorter<EmployeeTableModel> tableRowSorter;
 
     public MyPanel() {
         this.listControler=new EmployeeListControler();
@@ -26,6 +31,10 @@ public class MyPanel extends JPanel{
         JTable employeeTable=new JTable(employeeTableModel);
         this.fileSave=new FileSave(employeeTableModel);
         this.readFile=new ReadFile(listControler);
+        employeeTable.setAutoCreateRowSorter(true);
+        tableRowSorter=new TableRowSorter<EmployeeTableModel>(employeeTableModel);
+        employeeTable.setRowSorter(tableRowSorter);
+
 
         employeeTable.addMouseListener(new JTableButtonMouseListener(employeeTable));
         TableColumn positonColumn=employeeTable.getColumnModel().getColumn(2);
@@ -46,7 +55,7 @@ public class MyPanel extends JPanel{
         addSortEmployees.setMaximumSize(new Dimension(300,30));
         addSortEmployees.add(addEmployeeBtn());
         addSortEmployees.add(new JLabel("Sort:  "));
-        addSortEmployees.add(sortEmployee());
+        addSortEmployees.add(filterField());
         return addSortEmployees;
     }
 
@@ -61,11 +70,32 @@ public class MyPanel extends JPanel{
         });
         return btn;
     }
-    private JTextField sortEmployee(){
-        JTextField sortInput=new JTextField();
-        sortInput.setPreferredSize(new Dimension(300,30));
-        return sortInput;
+    private JTextField filterField(){
+        JTextField textField=new JTextField();
+        textField.setPreferredSize(new Dimension(300,20));
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                System.out.println(textField.getText());
+                newFilter(textField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                newFilter(textField.getText());
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                newFilter(textField.getText());
+
+            }
+        });
+
+        return textField;
     }
+
     public JMenuBar initMenuBar(){
         JMenuBar menuBar=new JMenuBar();
         menuBar.add(setMenu());
@@ -108,5 +138,14 @@ public class MyPanel extends JPanel{
         });
         return item;
     }
+    private void newFilter(String text){
+    RowFilter<EmployeeTableModel,Object> rf=null;
 
+    try{
+        rf=RowFilter.regexFilter(text,0,1,2);
+    }catch (PatternSyntaxException e){
+        return;
+    }
+    tableRowSorter.setRowFilter(rf);
+    }
 }
