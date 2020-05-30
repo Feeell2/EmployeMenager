@@ -1,4 +1,2 @@
-aa aaa Lead 0 0 
-adsad asdasd Lead 0 0 
-asdad asdads ArchitectIT 0 0 
-adsads asdads Lead 0 0 
+tomek jaki FrontendDev 5 5555 
+filinski sasda ArchitectIT 4 5555 

@@ -67,11 +67,9 @@ public class EmployeeTableModel extends AbstractTableModel{
             case 4:
                 return employee.getSalary();
             case 5:
-                JButton button=new JButton("deleete");
-
+                JButton button=new JButton("delete");
                 button.getActionListeners();
                 button.addActionListener(arg-> {
-                    System.out.println("click");
                     listControler.removeEmployee(rowIndex);
                 });
             return button;

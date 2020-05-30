@@ -29,10 +29,7 @@ public class MyPanel extends JPanel{
     public MyPanel() {
         initTable();
         initHandlingFile();
-        employeeTable.setAutoCreateRowSorter(true);
-        tableRowSorter=new TableRowSorter<EmployeeTableModel>(employeeTableModel);
-        employeeTable.setRowSorter(tableRowSorter);
-
+        initSorter();
         this.setLayout(new BorderLayout());
         this.add(addSortPanel(),BorderLayout.PAGE_START);
         this.add(new JScrollPane(employeeTable),BorderLayout.CENTER);
@@ -45,16 +42,22 @@ public class MyPanel extends JPanel{
         this.employeeTable=new JTable(employeeTableModel);
 
 
-        // adding comboBox
+        // comboBox setup
         TableColumn positonColumn=employeeTable.getColumnModel().getColumn(2);
         JComboBox<Position> comboBox=new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel<>(Position.values()));
         positonColumn.setCellEditor(new DefaultCellEditor(comboBox));
-        //add delete buttons
+        //delete buttons setup
         employeeTable.addMouseListener(new JTableButtonMouseListener(employeeTable));
         TableColumn buttonsColumn=employeeTable.getColumnModel().getColumn(5);
         buttonsColumn.setCellRenderer(new JTableButtonRenderer());
 
+    }
+    private void initSorter(){
+        this.employeeTable.setAutoCreateRowSorter(true);
+        this.tableRowSorter=new TableRowSorter<EmployeeTableModel>(employeeTableModel);
+        this.tableRowSorter.setSortable(5,false);
+        this.employeeTable.setRowSorter(tableRowSorter);
     }
     private void initHandlingFile(){
         this.fileSave=new FileSave(employeeTableModel);
@@ -88,7 +91,6 @@ public class MyPanel extends JPanel{
         textField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                System.out.println(textField.getText());
                 newFilter(textField.getText());
             }
 
@@ -119,18 +121,22 @@ public class MyPanel extends JPanel{
         newFileItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clikc");
-                listControler.clearList();
+
+                int n= JOptionPane.showConfirmDialog(
+                        new Frame(),
+                        "Do you really want to clear the list?",
+                        "clear list",
+                        JOptionPane.OK_OPTION,
+                        JOptionPane.NO_OPTION);
+                if (n==0){listControler.clearList();}
+
             }
         });
-//        JMenuItem openFileItem=new JMenuItem("Open");
-////    openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
         JMenuItem saveFile=new JMenuItem("Save");
         saveFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileSave.saveData();
-
             }
         });
         jMenu.add(openFile());
@@ -143,9 +149,14 @@ public class MyPanel extends JPanel{
         JFileChooser fileChooser=new JFileChooser();
         item.addActionListener(event->{
             int code=fileChooser.showOpenDialog(new MyPanel() );
+
             if(code==JFileChooser.APPROVE_OPTION){
-                String path=fileChooser.getSelectedFile().getPath();
-                readFile.readFile(path);
+                if (fileChooser.getSelectedFile().getPath().endsWith("txt")) {
+                    String path = fileChooser.getSelectedFile().getPath();
+                    readFile.readFile(path);
+                }else{
+                    JOptionPane.showMessageDialog(new JFrame(),"Format invalid");
+                }
             }
         });
         return item;
@@ -163,12 +174,9 @@ public class MyPanel extends JPanel{
         else if (text.charAt(0)=='>'){
             int number=Integer.parseInt(text.replaceFirst(">","0"));
             rf=RowFilter.numberFilter(RowFilter.ComparisonType.BEFORE,number,4);
-
         }else {
             rf=RowFilter.regexFilter(text,0,1,2,3,4);
         }
-
-
     tableRowSorter.setRowFilter(rf);
     }
 }

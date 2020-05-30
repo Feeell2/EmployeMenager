@@ -39,7 +39,6 @@ public class EmployeeListControler implements TableModelListener {
     public void addEmployee(String name, String surname, Position position, int seniority, int salary){
         employeeList.add(new Employee(name, surname, position, seniority, salary));
         updateList();
-        System.out.println(employeeList.size());
     }
     public void removeEmployee(int index){
         employeeList.remove(index);
