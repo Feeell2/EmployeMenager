@@ -24,31 +24,41 @@ public class MyPanel extends JPanel{
     private FileSave fileSave;
     private ReadFile readFile;
     private TableRowSorter<EmployeeTableModel> tableRowSorter;
+    private JTable employeeTable;
 
     public MyPanel() {
-        this.listControler=new EmployeeListControler();
-        this.employeeTableModel=new EmployeeTableModel(listControler.getEmployeeList());
-        listControler.setEmployeeTableModel(employeeTableModel);
-        this.employeeTableModel.setListControler(listControler);
-        JTable employeeTable=new JTable(employeeTableModel);
-        this.fileSave=new FileSave(employeeTableModel);
-        this.readFile=new ReadFile(listControler);
+        initTable();
+        initHandlingFile();
         employeeTable.setAutoCreateRowSorter(true);
         tableRowSorter=new TableRowSorter<EmployeeTableModel>(employeeTableModel);
         employeeTable.setRowSorter(tableRowSorter);
 
+        this.setLayout(new BorderLayout());
+        this.add(addSortPanel(),BorderLayout.PAGE_START);
+        this.add(new JScrollPane(employeeTable),BorderLayout.CENTER);
+    }
+    private void initTable(){
+        this.listControler=new EmployeeListControler();
+        this.employeeTableModel=new EmployeeTableModel(listControler.getEmployeeList());
+        listControler.setEmployeeTableModel(employeeTableModel);
+        this.employeeTableModel.setListControler(listControler);
+        this.employeeTable=new JTable(employeeTableModel);
 
-        employeeTable.addMouseListener(new JTableButtonMouseListener(employeeTable));
+
+        // adding comboBox
         TableColumn positonColumn=employeeTable.getColumnModel().getColumn(2);
         JComboBox<Position> comboBox=new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel<>(Position.values()));
         positonColumn.setCellEditor(new DefaultCellEditor(comboBox));
+        //add delete buttons
+        employeeTable.addMouseListener(new JTableButtonMouseListener(employeeTable));
         TableColumn buttonsColumn=employeeTable.getColumnModel().getColumn(5);
         buttonsColumn.setCellRenderer(new JTableButtonRenderer());
 
-        this.setLayout(new BorderLayout());
-        this.add(addSortPanel(),BorderLayout.PAGE_START);
-        this.add(new JScrollPane(employeeTable),BorderLayout.CENTER);
+    }
+    private void initHandlingFile(){
+        this.fileSave=new FileSave(employeeTableModel);
+        this.readFile=new ReadFile(listControler);
     }
     private JPanel addSortPanel(){
         JPanel addSortEmployees=new JPanel();
