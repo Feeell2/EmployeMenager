@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class MyPanel extends JPanel{
@@ -65,7 +67,7 @@ public class MyPanel extends JPanel{
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listControler.addEmployee("","",Position.Lead,0,0);
+                listControler.addEmployee("","",Position.Intern,0,0);
             }
         });
         return btn;
@@ -140,12 +142,23 @@ public class MyPanel extends JPanel{
     }
     private void newFilter(String text){
     RowFilter<EmployeeTableModel,Object> rf=null;
+        if(text.length()==0){
+            tableRowSorter.setRowFilter(null);
+        }
+        else if (text.charAt(0)=='<'){
+                int number=Integer.parseInt(text.replaceFirst("<","0"));
+                rf=RowFilter.numberFilter(RowFilter.ComparisonType.AFTER,number,4);
 
-    try{
-        rf=RowFilter.regexFilter(text,0,1,2);
-    }catch (PatternSyntaxException e){
-        return;
-    }
+        }
+        else if (text.charAt(0)=='>'){
+            int number=Integer.parseInt(text.replaceFirst(">","0"));
+            rf=RowFilter.numberFilter(RowFilter.ComparisonType.BEFORE,number,4);
+
+        }else {
+            rf=RowFilter.regexFilter(text,0,1,2,3,4);
+        }
+
+
     tableRowSorter.setRowFilter(rf);
     }
 }

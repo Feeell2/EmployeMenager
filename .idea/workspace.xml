@@ -6,8 +6,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/MyPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projekt1/com/company/ReadFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projekt1/com/company/ReadFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MyPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +37,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -66,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1589829292426</updated>
       <workItem from="1589829298562" duration="327000" />
-      <workItem from="1589829704409" duration="81050000" />
+      <workItem from="1589829704409" duration="89387000" />
     </task>
     <servers />
   </component>
@@ -78,22 +79,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590508350926" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1590599128876">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1590827883776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590599128876" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1590599128876">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590827883776" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1590827883776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590599128876" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1590599128876">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590827883776" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1590827883776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590599128876" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1590599128876">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590827883776" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1590827883776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590599128876" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/1920.-125.1920.1150/0.0.1536.824@0.0.1536.824" timestamp="1590827883776" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1590595937601">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
