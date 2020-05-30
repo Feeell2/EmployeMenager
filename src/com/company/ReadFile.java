@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +22,10 @@ public class ReadFile {
             }
 
         } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "The file contains an error",
+                    "Error",
+                    JOptionPane.YES_OPTION);
             e.printStackTrace();
         }
     }

@@ -3,9 +3,7 @@ package com.company;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class EmployeeListControler implements TableModelListener {
@@ -49,12 +47,9 @@ public class EmployeeListControler implements TableModelListener {
         updateList();
     }
     private void updateList(){
-        System.out.println(employeeTableModel==null);
         if (employeeTableModel!=null){
             employeeTableModel.fireTableDataChanged();}
-
     }
-
     @Override
     public void tableChanged(TableModelEvent e) {
         int row =e.getFirstRow();
@@ -63,5 +58,4 @@ public class EmployeeListControler implements TableModelListener {
         String columnName=model.getColumnName(column+1);
         Object date=model.getValueAt(row,column);
     }
-
 }
